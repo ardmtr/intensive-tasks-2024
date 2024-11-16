@@ -32,9 +32,11 @@ public class Task1 {
 
         switch (age % 10) {
 
-            case 1: if ((age / 10) % 10 != 1 )
+            case 1: if ((age / 10) % 10 != 1 ) {
 
             return "Вам " + age + " год";
+
+            }
 
             case 2:
 
