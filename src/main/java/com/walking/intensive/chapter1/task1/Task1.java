@@ -15,7 +15,7 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 15;
+        int age = 32;
 
         System.out.println(getAgeString(age));
     }
@@ -32,9 +32,7 @@ public class Task1 {
 
         switch (age % 10) {
 
-            case 1: if (age == 11 || age == 111) {
-                return "Вам " + age + " лет";
-            }
+            case 1: if ((age / 10) % 10 != 1 )
 
             return "Вам " + age + " год";
 
