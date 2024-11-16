@@ -15,7 +15,7 @@ package com.walking.intensive.chapter1.task1;
 public class Task1 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int age = 0;
+        int age = 15;
 
         System.out.println(getAgeString(age));
     }
@@ -23,6 +23,31 @@ public class Task1 {
     static String getAgeString(int age) {
 //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if (age < 0 || age > 123) { /* Только один человек за всю историю наблюдений смог достоверно прожить более
+         120 лет — ставшая вследствие своего возраста легендарной Жанна Кальман (122,5 года).
+            */
+
+            return "Некорректный ввод";
+        }
+
+        switch (age % 10) {
+
+            case 1: if (age == 11 || age == 111) {
+                return "Вам " + age + " лет";
+            }
+
+            return "Вам " + age + " год";
+
+            case 2:
+
+            case 3:
+
+            case 4:  if ((age / 10) % 10 != 1) {
+                return "Вам " + age + " года";
+            }
+
+            default: return "Вам " + age + " лет";
+        }
+
     }
 }
