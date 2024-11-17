@@ -35,7 +35,7 @@ public class Task2 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
 
-        System.out.println(getFlatLocation(10,3,33));
+        System.out.println(getFlatLocation(10,3,43));
 
     }
 
@@ -60,18 +60,13 @@ public class Task2 {
 
         int  floor = ((flatNumber - 1) % (floorAmount * 4)) / 4 + 1;
 
-        switch (flatNumber % 4) {
-
-            case 1: outText = "слева от лифта, влево";
-                break;
-            case 2: outText = "слева от лифта, вправо";
-                break;
-            case 3: outText = "справа от лифта, влево";
-                break;
-            case 0: outText = "справа от лифта, вправо";
-                break;
-
-        }
+        outText = switch (flatNumber % 4) {
+            case 1 -> "слева от лифта, влево";
+            case 2 -> "слева от лифта, вправо";
+            case 3 -> "справа от лифта, влево";
+            case 0 -> "справа от лифта, вправо";
+            default -> outText;
+        };
 
 
         return  flatNumber + " кв - " +  entrance + " подъезд, " + floor +" этаж, " + outText;
