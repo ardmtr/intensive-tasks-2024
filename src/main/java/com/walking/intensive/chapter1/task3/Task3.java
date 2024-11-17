@@ -36,16 +36,11 @@ public class Task3 {
     static boolean isLeap(int year) {
         //Место для вашего кода
 
-        if (year <= 0 ||year > Integer.MAX_VALUE) {
+        if (year <= 0 ) {
             return false;
         }
 
-        if (((year % 4 == 0 && year % 100 != 0)) || (year % 400 == 0)) {
-
-            return true;
-        }
-
-        return false;
+        return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 
     }
 }
