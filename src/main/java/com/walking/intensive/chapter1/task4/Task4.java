@@ -24,17 +24,16 @@ package com.walking.intensive.chapter1.task4;
  */
 public class Task4 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 1;
-        double b = -8;
-        double c = 15;
+
+        double a = -1;
+        double b = 9;
+        double c = 20;
 
         System.out.println(solveEquation(a, b, c));
 
     }
 
     static String solveEquation(double a, double b, double c) {
-        //        Место для вашего кода
 
         if (a == 0) {
 
@@ -58,25 +57,22 @@ public class Task4 {
 
         double sumOfRoots = -b / a;
 
-        double productOfRoots = c / a;
+        double multiplicationOfRoots = c / a;
 
-        if (sumOfRoots == 0 && productOfRoots == 0) {
+        if (sumOfRoots == 0 && multiplicationOfRoots == 0) {
 
             return "Количество решений: 1. Корень: 0";
 
-        } else if (productOfRoots == 0) {
+        } else if (multiplicationOfRoots == 0) {
 
-            double nonZeroRoot = sumOfRoots;
-
-            return "Количество решений: 2. Корни: 0;" + nonZeroRoot;
+            return "Количество решений: 2. Корни: 0;" + sumOfRoots;
 
         } else {
 
-            double discriminant = sumOfRoots * sumOfRoots - 4 * productOfRoots;
+            double discriminant = sumOfRoots * sumOfRoots - 4 * multiplicationOfRoots;
 
             if (discriminant >= 0) {
 
-            }
                 double sqrtDiscriminant = Math.sqrt(discriminant);
 
                 double root1 = (sumOfRoots - sqrtDiscriminant) / 2;
@@ -85,15 +81,13 @@ public class Task4 {
 
                 if (root1 > root2) {
 
-                    double temp = root1;
+                    return "Количество решений: 2. Корни: " + root2+ "; " + root1;
 
-                    root1 = root2;
+                } else {
 
-                    root2 = temp;
+                    return "Количество решений: 2. Корни: " + root1 + "; " + root2;
 
                 }
-
-                return "Количество решений: 2. Корни: " + root1 + ";" + root2;
 
             } else {
 
@@ -101,3 +95,4 @@ public class Task4 {
             }
         }
     }
+}
