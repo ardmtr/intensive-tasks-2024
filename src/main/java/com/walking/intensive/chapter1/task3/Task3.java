@@ -24,8 +24,8 @@ package com.walking.intensive.chapter1.task3;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task3 {
+
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
 
         int year = 4002;
 
@@ -34,10 +34,11 @@ public class Task3 {
     }
 
     static boolean isLeap(int year) {
-        //Место для вашего кода
 
-        if (year <= 0 ) {
+        if (year <= 0) {
+
             return false;
+
         }
 
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
