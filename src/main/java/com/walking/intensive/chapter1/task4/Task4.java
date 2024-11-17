@@ -25,9 +25,9 @@ package com.walking.intensive.chapter1.task4;
 public class Task4 {
     public static void main(String[] args) {
 
-        double a = 0;
-        double b = 0;
-        double c = 1;
+        double a = 1;
+        double b = 1;
+        double c = -1;
 
         System.out.println(solveEquation(a, b, c));
     }
@@ -49,30 +49,23 @@ public class Task4 {
 
         double rootsSum = -b / a;
         double rootsMultiplication = c / a;
-
-        if (rootsSum == 0 && rootsMultiplication == 0) {
-            return "Количество решений: 1. Корень: 0";
-        }
-
-        if (rootsMultiplication == 0) {
-            return "Количество решений: 2. Корни: 0;" + rootsSum;
-        }
-
         double discriminant = rootsSum * rootsSum - 4 * rootsMultiplication;
 
-        if (discriminant >= 0) {
+        if (discriminant == 0) {
+            double root = -b / (2 * a);
+            return "Количество решений: 1. Корень: " + root;
+        }
+
+        if (discriminant > 0) {
             double sqrtDiscriminant = Math.sqrt(discriminant);
             double root1 = (rootsSum - sqrtDiscriminant) / 2;
             double root2 = (rootsSum + sqrtDiscriminant) / 2;
 
             if (root1 > root2) {
                 return "Количество решений: 2. Корни: " + root2 + ";" + root1;
-
             }
-                return "Количество решений: 2. Корни: " + root1 + ";" + root2;
-
+            return "Количество решений: 2. Корни: " + root1 + ";" + root2;
         }
-
         return "Количество решений: 0.";
     }
 }
