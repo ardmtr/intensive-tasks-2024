@@ -10,7 +10,9 @@ package com.walking.intensive.chapter1.task5;
  */
 public class Task5 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(getAreaByHeron(-1,10,10));
+        System.out.println(getHeights(-1,10,10).toString());
     }
 
     /**
@@ -23,9 +25,13 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        if (a + b <= c || a + c <= b || b + c <= a) {
+            return -1;
+        }
+
+        double halfPerimeter = (a + b +c) / 2;
+        return Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
     }
 
     /**
@@ -36,9 +42,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        double[] heightsArray;
+        if (a + b <= c || a + c <= b || b + c <= a) {
+            return new double[0];
+        }
+
+        heightsArray = new double[3];
+        heightsArray[0] = 1;
+        heightsArray[1] = 2;
+        heightsArray[2] = 1;
+
+        return heightsArray;
     }
 
     /**
