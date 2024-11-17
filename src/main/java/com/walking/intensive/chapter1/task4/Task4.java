@@ -81,11 +81,11 @@ public class Task4 {
 
                 if (root1 > root2) {
 
-                    return "Количество решений: 2. Корни: " + root2+ "; " + root1;
+                    return "Количество решений: 2. Корни: " + root2+ ";" + root1;
 
                 } else {
 
-                    return "Количество решений: 2. Корни: " + root1 + "; " + root2;
+                    return "Количество решений: 2. Корни: " + root1 + ";" + root2;
 
                 }
 
