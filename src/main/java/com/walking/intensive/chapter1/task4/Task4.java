@@ -51,21 +51,22 @@ public class Task4 {
         double rootsMultiplication = c / a;
         double discriminant = rootsSum * rootsSum - 4 * rootsMultiplication;
 
+        if (discriminant < 0) {
+            return "Количество решений: 0.";
+        }
+
         if (discriminant == 0) {
             double root = -b / (2 * a);
             return "Количество решений: 1. Корень: " + root;
         }
 
-        if (discriminant > 0) {
-            double sqrtDiscriminant = Math.sqrt(discriminant);
-            double root1 = (rootsSum - sqrtDiscriminant) / 2;
-            double root2 = (rootsSum + sqrtDiscriminant) / 2;
+        double sqrtDiscriminant = Math.sqrt(discriminant);
+        double root1 = (rootsSum - sqrtDiscriminant) / 2;
+        double root2 = (rootsSum + sqrtDiscriminant) / 2;
 
-            if (root1 > root2) {
-                return "Количество решений: 2. Корни: " + root2 + ";" + root1;
-            }
-            return "Количество решений: 2. Корни: " + root1 + ";" + root2;
+        if (root1 > root2) {
+            return "Количество решений: 2. Корни: " + root2 + ";" + root1;
         }
-        return "Количество решений: 0.";
+        return "Количество решений: 2. Корни: " + root1 + ";" + root2;
     }
 }
