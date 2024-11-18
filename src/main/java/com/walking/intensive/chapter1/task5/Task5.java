@@ -1,6 +1,6 @@
 package com.walking.intensive.chapter1.task5;
 
-import java.util.Arrays;
+//import java.util.Arrays;
 
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
@@ -14,9 +14,12 @@ public class Task5 {
     public static void main(String[] args) {
 
         // System.out.println(getAreaByHeron(-1,-2,-2));
-       // System.out.println(Arrays.toString(getHeights(2, 3, 4)));
-       // System.out.println(Arrays.toString(getMedians(4,5,6)));
-        System.out.println(Arrays.toString(getBisectors(3,4,5)));
+        // System.out.println(Arrays.toString(getHeights(2, 3, 4)));
+        // System.out.println(Arrays.toString(getMedians(4,5,6)));
+        // System.out.println(Arrays.toString(getBisectors(4,4,6)));
+        // System.out.println(Arrays.toString(getAngles(3, 4, 5)));
+        // System.out.println(getInscribedCircleRadius(5,7,10));
+        // System.out.println(getCircumradius(3,4,5));
     }
 
     /**
@@ -57,7 +60,7 @@ public class Task5 {
         heightsArray[0] = 2 * Area / a;
         heightsArray[1] = 2 * Area / b;
         heightsArray[2] = 2 * Area / c;
-     // Arrays.sort(heightsArray); так конечно проще =). но допустим мы про import ничего не знаем (да мы и не знаем, IDEA сама подсказала что и как)
+        // Arrays.sort(heightsArray); так конечно проще =). Но допустим мы про import ничего не знаем (да мы и не знаем, IDEA сама подсказала что и как)
 
         return sortResult(heightsArray);
     }
@@ -119,7 +122,14 @@ public class Task5 {
             return new double[0];
         }
 
-        return null; // Заглушка. При реализации - удалить
+        double[] anglesArray;
+        anglesArray = new double[3];
+
+        anglesArray[0] = 180 * Math.acos((a * a + c * c - b * b) / (2 * a * c)) / Math.PI;
+        anglesArray[1] = 180 * Math.acos((a * a + b * b - c * c) / (2 * a * b)) / Math.PI;
+        anglesArray[2] = 180 - anglesArray[0] - anglesArray[1];
+
+        return sortResult(anglesArray);
     }
 
     /**
@@ -136,7 +146,7 @@ public class Task5 {
             return -1;
         }
 
-        return 0; // Заглушка. При реализации - удалить
+           return (2 * getAreaByHeron(a, b, c) / (a + b + c));
     }
 
     /**
@@ -152,7 +162,9 @@ public class Task5 {
             return -1;
         }
 
-        return 0; // Заглушка. При реализации - удалить
+        double halfPerimeter = (a + b + c) / 2;
+
+        return ((a * b * c) / (4 * Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter -b) * (halfPerimeter - c))));
     }
 
     /**
@@ -184,7 +196,7 @@ public class Task5 {
 
     // сортировка из 3 чисел, без всяких пузырьков, вставок и тд
     static double[] sortResult(double[] unSortResult) {
-        double [] sort;
+        double[] sort;
         sort = new double[3];
         sort[0] = Math.min(Math.min(unSortResult[0], unSortResult[1]), unSortResult[2]);
         sort[2] = Math.max(Math.max(unSortResult[0], unSortResult[1]), unSortResult[2]);
@@ -192,4 +204,4 @@ public class Task5 {
 
         return sort;
     }
- }
+}
