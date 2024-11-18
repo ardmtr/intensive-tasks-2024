@@ -20,6 +20,7 @@ public class Task5 {
         // System.out.println(Arrays.toString(getAngles(3, 4, 5)));
         // System.out.println(getInscribedCircleRadius(5,7,10));
         // System.out.println(getCircumradius(3,4,5));
+        System.out.println(getAreaAdvanced(4,3,5));
     }
 
     /**
@@ -187,7 +188,11 @@ public class Task5 {
             return -1;
         }
 
-        return 0; // Заглушка. При реализации - удалить
+        // S = 0,5 * a * b * sin(a)
+        double cosA = (b * b + c * c - a * a) / (2 * b * c);
+        double sinA = Math.sqrt(1 - (cosA * cosA)); // Значение с минусом не имеет смысла
+
+        return (c * b * sinA / 2); // Заглушка. При реализации - удалить
     }
 
     static boolean isWrongTriangle(double a, double b, double c) {
