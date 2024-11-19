@@ -56,11 +56,11 @@ public class Task5 {
             return new double[0];
         }
 
-        double Area = getAreaByHeron(a, b, c);
+        double area = getAreaByHeron(a, b, c);
         heightsArray = new double[3];
-        heightsArray[0] = 2 * Area / a;
-        heightsArray[1] = 2 * Area / b;
-        heightsArray[2] = 2 * Area / c;
+        heightsArray[0] = 2 * area / a;
+        heightsArray[1] = 2 * area / b;
+        heightsArray[2] = 2 * area / c;
         // Arrays.sort(heightsArray); так конечно проще =). Но допустим мы про import ничего не знаем (да мы и не знаем, IDEA сама подсказала что и как)
 
         return sortResult(heightsArray);
@@ -163,9 +163,7 @@ public class Task5 {
             return -1;
         }
 
-        double halfPerimeter = (a + b + c) / 2;
-
-        return ((a * b * c) / (4 * Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c))));
+        return ((a * b * c) / (4 * getAreaByHeron(a, b, c)));
     }
 
     /**
