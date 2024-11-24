@@ -20,11 +20,40 @@ package com.walking.intensive.chapter2.task8;
  */
 public class Task8 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        System.out.println(getHappyTicketChance());
+
     }
 
     static double getHappyTicketChance() {
-        // Ваш код
-        return 0.0;
+        double chance = 0;
+
+        for (int i = 0; i < 1000000; i++) {
+
+            if (isHappyTicket(i)) {
+                chance ++;
+            }
+        }
+
+        return chance / 1000000;
+    }
+
+    public static boolean isHappyTicket(int ticketNumber ) {
+
+        int sumFirst = 0;
+        int sumSecond = 0;
+
+        for (int i = 0; i < 3; i++) {
+            sumSecond += ticketNumber % 10;
+            ticketNumber /= 10;
+        }
+
+//        на выходе уже останутся только старшие 3 разряда
+        for (int i = 0; i < 3; i++) {
+            sumFirst += ticketNumber % 10;
+            ticketNumber /= 10;
+        }
+
+        return sumFirst == sumSecond;
     }
 }
