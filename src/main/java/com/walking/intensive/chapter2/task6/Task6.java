@@ -9,9 +9,9 @@ package com.walking.intensive.chapter2.task6;
 public class Task6 {
     public static void main(String[] args) {
 
-        System.out.println(getLcm(15, 25));
-        System.out.println(getGcd(6, 8));
-        System.out.println(getGcdByEuclideanAlgorithm(12,24));
+//        System.out.println(getLcm(15, 25));
+//        System.out.println(getGcd(6, 8));
+//        System.out.println(getGcdByEuclideanAlgorithm(12, 24));
 
     }
 
@@ -49,7 +49,6 @@ public class Task6 {
             if (m % i == 0 && n % i == 0) {
                 return i;
             }
-
         }
         return 1;
     }
@@ -64,17 +63,10 @@ public class Task6 {
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
 
-        if (m <= 0 || n <= 0) {
-            return -1;
+        if (m == 0) {
+            return n;
         }
-        int maxVal = Math.max(m,n);
-        int minVal = Math.min(m,n);
 
-        while (minVal != 0) {
-            int gcd = minVal;
-            minVal = maxVal % minVal;
-            maxVal = gcd;
-        }
-        return(maxVal);
+        return getGcdByEuclideanAlgorithm((n % m), m);
     }
 }
