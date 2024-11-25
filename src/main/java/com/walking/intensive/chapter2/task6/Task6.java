@@ -11,7 +11,7 @@ public class Task6 {
 
 //        System.out.println(getLcm(15, 25));
 //        System.out.println(getGcd(6, 8));
-//        System.out.println(getGcdByEuclideanAlgorithm(12, 24));
+        System.out.println(getGcdByEuclideanAlgorithm(0, 20));
 
     }
 
@@ -62,11 +62,22 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
+//      думаю, что проверка на 0 параметра необходима, как побороть без валидации непонятно. Другое дело, что валидация
+//      не имеет смысла внутри рекурсивного метода, поэтому вот так.
+
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+
+        return getGcdByEuclideanRecursion(m,n);
+    }
+
+    static int getGcdByEuclideanRecursion(int m, int n) {
 
         if (m == 0) {
             return n;
         }
 
-        return getGcdByEuclideanAlgorithm((n % m), m);
+       return getGcdByEuclideanRecursion((n % m), m);
     }
 }
