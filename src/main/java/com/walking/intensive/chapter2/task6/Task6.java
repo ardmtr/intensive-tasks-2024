@@ -24,7 +24,7 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
 
-        if (m <= 0 || n <= 0) {
+        if (invalidParams(m, n)) {
             return -1;
         }
 
@@ -40,7 +40,7 @@ public class Task6 {
      */
     static int getGcd(int m, int n) {
 
-        if (m <= 0 || n <= 0) {
+        if (invalidParams(m, n)) {
             return -1;
         }
 
@@ -65,11 +65,11 @@ public class Task6 {
 //      думаю, что проверка на 0 параметра необходима, как побороть без валидации непонятно. Другое дело, что валидация
 //      не имеет смысла внутри рекурсивного метода, поэтому вот так.
 
-        if (m <= 0 || n <= 0) {
+        if (invalidParams(m, n)) {
             return -1;
         }
 
-        return getGcdByEuclideanRecursion(m,n);
+        return getGcdByEuclideanRecursion(m, n);
     }
 
     static int getGcdByEuclideanRecursion(int m, int n) {
@@ -78,6 +78,11 @@ public class Task6 {
             return n;
         }
 
-       return getGcdByEuclideanRecursion((n % m), m);
+        return getGcdByEuclideanRecursion((n % m), m);
+    }
+
+    static boolean invalidParams(int m, int n) {
+
+        return (m <= 0 || n <= 0);
     }
 }
