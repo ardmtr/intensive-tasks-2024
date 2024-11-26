@@ -52,10 +52,33 @@ package com.walking.intensive.chapter2.task9;
 public class Task9 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getPascalTriangle(18));
+
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+
+        if (n < 0) {
+            return "";
+        }
+
+        String result = "";
+// Ну через массивы можно конечно вывод красивее сделать, но без них я не понимаю, как привязать отступ к длине строки,
+// которую я не знаю до конца цикла.. 2 раза циклы одинаковые гонять??
+
+        for (int i = 0; i < n; i++) {
+
+            int number = 1;
+            result += "\n";
+            String startDivider = " ".repeat((n - i - 1) * 2); // ЭТО ДО второго ЦИКЛА!
+
+            for (int j = 0; j <= i; j++) {
+                String divider = " ";
+                result += startDivider + number + divider;
+                number = number * (i - j) / (j + 1);
+                startDivider = divider;
+            }
+        }
+        return result;
     }
 }
