@@ -29,31 +29,29 @@ public class Task8 {
         double chance = 0;
 
         for (int i = 0; i < 1000000; i++) {
-
             if (isHappyTicket(i)) {
-                chance ++;
+                chance++;
             }
         }
 
         return chance / 1000000;
     }
 
-    public static boolean isHappyTicket(int ticketNumber ) {
+    public static boolean isHappyTicket(int ticketNumber) {
 
-        int sumFirst = 0;
-        int sumSecond = 0;
-
-        for (int i = 0; i < 3; i++) {
-            sumSecond += ticketNumber % 10;
-            ticketNumber /= 10;
-        }
-
-//        на выходе уже останутся только старшие 3 разряда
-        for (int i = 0; i < 3; i++) {
-            sumFirst += ticketNumber % 10;
-            ticketNumber /= 10;
-        }
+        int sumFirst = calcSumOfDigits(ticketNumber);
+        int sumSecond = calcSumOfDigits(ticketNumber / 1000);
 
         return sumFirst == sumSecond;
+    }
+
+    static int calcSumOfDigits(int ticketNumber) {
+
+        int sum = 0;
+        for (int i = 0; i < 3; i++) {
+            sum += ticketNumber % 10;
+            ticketNumber /= 10;
+        }
+        return sum;
     }
 }
