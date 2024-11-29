@@ -11,11 +11,49 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+//        String inputString = "aa   22 33 dd d А п лор Ш! ;?*( оля";
+//        int length = inputString.length();
+//        String normalizedString = "";
+//        for (int i = 0; i < length; i++) {
+//
+//            if (Character.isLetter(inputString.charAt(i))) {
+//                normalizedString += inputString.charAt(i);
+//            }
+//            System.out.println(normalizedString);
+//        }
+        System.out.println(isPalindrome("Муза! Ранясь шилом опыта, ты помолишься на разум."));
+        System.out.println(isPalindrome("Муза!  шилом опыта, ты помолишься на разум."));
+        System.out.println(isPalindrome("11222 _2211"));
+
     }
 
     static boolean isPalindrome(String inputString) {
-        // Ваш код
-        return false;
+
+        int length = inputString.length();
+
+        String normalizedString = "";
+        for (int i = 0; i < length; i++) {
+
+            if (Character.isLetter(inputString.charAt(i))) {
+                normalizedString += Character.toLowerCase(inputString.charAt(i));
+            }
+        }
+//        System.out.println(normalizedString);
+        length = normalizedString.length();
+
+        if (length <= 1) {
+
+            return false;
+        }
+
+        for (int i = 1; i < (length / 2); i++) {
+
+
+            if (normalizedString.charAt(i) != normalizedString.charAt(length - i - 1)) {
+
+                return false;
+            }
+        }
+        return true;
     }
 }
