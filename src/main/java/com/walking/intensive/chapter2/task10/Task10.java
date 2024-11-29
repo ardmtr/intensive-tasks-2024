@@ -30,12 +30,13 @@ public class Task10 {
     static boolean isPalindrome(String inputString) {
 
         int length = inputString.length();
+        StringBuilder normalizedString = new StringBuilder();
 
-        String normalizedString = "";
         for (int i = 0; i < length; i++) {
 
             if (Character.isLetter(inputString.charAt(i))) {
-                normalizedString += Character.toLowerCase(inputString.charAt(i));
+
+                normalizedString.append(Character.toLowerCase(inputString.charAt(i)));
             }
         }
 //        System.out.println(normalizedString);
@@ -47,7 +48,6 @@ public class Task10 {
         }
 
         for (int i = 1; i < (length / 2); i++) {
-
 
             if (normalizedString.charAt(i) != normalizedString.charAt(length - i - 1)) {
 
