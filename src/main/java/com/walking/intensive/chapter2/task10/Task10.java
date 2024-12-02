@@ -29,28 +29,29 @@ public class Task10 {
 
     static boolean isPalindrome(String inputString) {
 
+        if (inputString == null) {
+            return false;
+        }
+
         int length = inputString.length();
         StringBuilder normalizedString = new StringBuilder();
 
         for (int i = 0; i < length; i++) {
 
-            if (Character.isLetter(inputString.charAt(i))) {
-
-                normalizedString.append(Character.toLowerCase(inputString.charAt(i)));
+            char symbol = inputString.charAt(i);
+            if (Character.isLetter(symbol)) {
+                normalizedString.append(Character.toLowerCase(symbol));
             }
         }
-//        System.out.println(normalizedString);
+
         length = normalizedString.length();
-
         if (length <= 1) {
-
             return false;
         }
 
         for (int i = 1; i < (length / 2); i++) {
 
             if (normalizedString.charAt(i) != normalizedString.charAt(length - i - 1)) {
-
                 return false;
             }
         }
