@@ -42,11 +42,35 @@ package com.walking.intensive.chapter3.task11;
  */
 public class Task11 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+//        int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+//        System.out.println(getOddSubArraysElementsSum(arr));
+
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        // Ваш код
-        return 0;
+// вычисляем количество подмассивов с нечетной длиной содержащих элемент array[i],
+// умножаем кол-во подмассивов с нечетной длиной на элемент
+// (всего возможных подмассивов в массиве C = N*(N+1) - нечетных соответственно (C+1) /2
+// для каждого элемента  Ci = (n * (i + 1) - (i + 1) * i)  = (i + 1) * (n - 1); Ci +1 /2
+
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+
+        int sum = 0;
+        int n = array.length;
+
+        for (int i = 0; i < n; i++) {
+
+            if (array[i] < 0) {
+                return -1;
+            }
+
+            int amountOddSubArrays = ((i + 1) * (n - i) + 1) / 2;
+            sum += array[i] * amountOddSubArrays;
+        }
+        return sum;
     }
 }
+
