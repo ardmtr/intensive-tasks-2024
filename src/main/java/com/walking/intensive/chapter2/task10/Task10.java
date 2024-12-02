@@ -37,20 +37,20 @@ public class Task10 {
         StringBuilder normalizedString = new StringBuilder();
 
         for (int i = 0; i < length; i++) {
-
             char symbol = inputString.charAt(i);
+
             if (Character.isLetter(symbol)) {
                 normalizedString.append(Character.toLowerCase(symbol));
             }
         }
 
         length = normalizedString.length();
+
         if (length <= 1) {
             return false;
         }
 
         for (int i = 1; i < (length / 2); i++) {
-
             if (normalizedString.charAt(i) != normalizedString.charAt(length - i - 1)) {
                 return false;
             }
