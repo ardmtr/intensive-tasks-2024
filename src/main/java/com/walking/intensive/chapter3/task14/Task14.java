@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task14;
 
+//import java.util.Arrays;
+
 /**
  * Необходимо разработать программу, которая определяет количество объектов на радарах.
  *
@@ -32,7 +34,7 @@ package com.walking.intensive.chapter3.task14;
  * <ul>
  * <li>objectCounts[0] = 3, потому что радар с координатами (2;3) и радиусом действия 1 видит объекты с координатами
  * (1;3), (2;2) и (3;3). Всего 3 объекта.
- *</ul>
+ * </ul>
  *
  * <p>При наличии некорректных входных данных верните из метода пустой массив.
  *
@@ -43,11 +45,46 @@ package com.walking.intensive.chapter3.task14;
  */
 public class Task14 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+//        int[][] object = {{-1, -1}, {2, 2}, {3, 3}, {4, 4}, {5, 5}};
+//        int[][] radars = {{-1, -2, 3}, {2, 2, 5}, {4, 3, 1}, {4, 3, 6}};
+//        System.out.println(Arrays.toString(getObjectCounts(object, radars)));
     }
 
     static int[] getObjectCounts(int[][] objectLocations, int[][] radars) {
-        // Ваш код
-        return new int[0];
+
+        int[] objectCounts = new int[radars.length];
+
+        for (int i = 0; i < radars.length; i++) {
+
+            if (radars[i].length != 3 || (radars[i][2] < 0)) {
+                return new int[0];
+            }
+
+            int count = 0;
+            int xStart = radars[i][0];
+            int yStart = radars[i][1];
+            int radius = radars[i][2];
+
+            for (int[] object : objectLocations) {
+
+                if (object.length != 2) {
+
+                    return new int[0];
+                }
+
+                if (isVisibleObject(object, xStart, yStart, radius)) {
+                    count++;
+                }
+            }
+
+            objectCounts[i] = count;
+        }
+        return objectCounts;
+    }
+
+    static boolean isVisibleObject(int[] object, int xStart, int yStart, int radius) {
+        int distanceX = object[0] - xStart;
+        int distanceY = object[1] - yStart;
+        return distanceX * distanceX + distanceY * distanceY <= radius * radius;
     }
 }
