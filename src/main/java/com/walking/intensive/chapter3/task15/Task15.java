@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter3.task15;
 
+//import java.util.Arrays;
+
 /**
  * Существует город, состоящий из N x N блоков, где каждый блок содержит одно здание в форме вертикальной
  * квадратной призмы. Линия горизонта города — это внешний контур, образованный всеми зданиями,
@@ -23,7 +25,7 @@ package com.walking.intensive.chapter3.task15;
  *
  * <p>Пример:
  *
- * <p>Входящий массив: city[ ][ ] = [[2,1],[1,3]].
+ * <p>Входящий массив: city[ ][ ] = [[2,1], [1,3]].
  *
  * <p>Возвращаемое значение: 2.
  *
@@ -40,11 +42,61 @@ package com.walking.intensive.chapter3.task15;
  */
 public class Task15 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+  //      int[][] cityTest = {{3, 0, 8}, {2, 4, 7}, {2, 6, 4, 1}};
+
     }
 
     static int getMaxFloors(int[][] city) {
-        // Ваш код
-        return 0;
+
+        if (isInvalidParams(city)) {
+            return -1;
+        }
+
+        int length = city.length;
+        int[] rowLimits = new int[length];
+        int[] columnLimits = new int[length];
+        for (int r = 0; r < rowLimits.length; r++) {
+            int maxColumn = 0;
+            int maxRow = 0;
+
+            for (int c = 0; c < columnLimits.length; c++) {
+                maxRow = Integer.max(maxRow, city[r][c]);
+                maxColumn = Integer.max(maxColumn, city[c][r]);
+            }
+
+            rowLimits[r] = maxRow;
+            columnLimits[r] = maxColumn;
+        }
+
+        int maxFloors = 0;
+        for (int r = 0; r < rowLimits.length; r++) {
+            for (int c = 0; c < columnLimits.length; c++) {
+                int limitFloor = Math.min(columnLimits[c], rowLimits[r]);
+
+                if (city[r][c] < limitFloor) {
+                    maxFloors += limitFloor - city[r][c];
+                }
+            }
+        }
+        return maxFloors;
+    }
+
+    static boolean isInvalidParams(int[][] city) {
+
+        if (city.length < 1) {
+            return true;
+        }
+
+        for (int[] rows : city) {
+            if (rows.length != city.length) {
+                return true;
+            }
+            for (int column : rows) {
+                if (column < 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
