@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter4.task17;
 
+import java.util.Arrays;
+
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
  * Чтобы занять свое время, он развлекал себя следующей игрой.
@@ -21,7 +23,11 @@ package com.walking.intensive.chapter4.task17;
  */
 public class Task17 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+//        System.out.println(Arrays.toString(sortByBubble(new int[]{1, 2, 4, 0, -1, -10, -20})));
+//        System.out.println(Arrays.toString(sortByBubbleOptimization(new int[]{1, 2, 4, 0, -1, -10, -20})));
+        System.out.println(Arrays.toString(sortByQuicksort(new int[]{2, 4, 0, -1, -1, -1, 1, -10, -20})));
+        System.out.println(Arrays.toString(sortByQuicksort(new int[]{20, 4})));
     }
 
     /**
@@ -40,9 +46,48 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByBubble(int[] array) {
-        // Ваш код
-        return new int[]{};
+
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = 0; j < array.length - i - 1; j++) {
+
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                }
+            }
+        }
+        return array;
     }
+
+    static int[] sortByBubbleOptimization(int[] array) {
+
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        boolean isSwapped = true;
+        int i = 0;
+        while (isSwapped) {
+            isSwapped = false;
+            for (int j = 0; j < array.length - i - 1; j++) {
+
+                if (array[j] > array[j + 1]) {
+                    int temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    isSwapped = true;
+                }
+            }
+            i++;
+        }
+        return array;
+    }
+
     /**
      * Быстрая сортировка, она же QuickSort:
      *
@@ -84,8 +129,44 @@ public class Task17 {
      * </ol>
      */
     static int[] sortByQuicksort(int[] array) {
-        // Ваш код
-        return new int[]{};
+
+        if (array == null || array.length == 0) {
+            return new int[0];
+        }
+
+        int max = array.length - 1;
+        int min = 0;
+        quickSort(array, min, max);
+        return array;
+    }
+
+    static void quickSort(int[] array, int left, int right) {
+        int i = left;
+        int j = right;
+        int support = (right - left) / 2;
+
+        while (array[i] < array[left + support]) {
+            i++;
+        }
+        while (array[j] > array[left + support]) {
+            j--;
+        }
+
+        if (i <= j) {
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+            i++;
+            j--;
+        }
+
+        if (left < j) {
+            quickSort(array, left, j);
+        }
+
+        if (i < right) {
+            quickSort(array, i, right);
+        }
     }
 
     /**
