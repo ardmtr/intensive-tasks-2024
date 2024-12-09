@@ -25,7 +25,7 @@ public class Task17 {
     public static void main(String[] args) {
 
 //        System.out.println(Arrays.toString(sortByBubble(new int[]{1, 2, 4, 0, -1, -10, -20})));
-//        System.out.println(Arrays.toString(sortByBubbleOptimization(new int[]{1, 2, 4, 0, -1, -10, -20})));
+//        System.out.println(Arrays.toString(sortByBubble(new int[]{1, 8, 4, 0, -1, -10, -20})));
         System.out.println(Arrays.toString(sortByQuicksort(new int[]{2, 4, 0, -1, -1, -1, 1, -10, -20})));
         System.out.println(Arrays.toString(sortByQuicksort(new int[]{20, 4})));
     }
@@ -51,25 +51,6 @@ public class Task17 {
             return new int[0];
         }
 
-        for (int i = 0; i < array.length - 1; i++) {
-            for (int j = 0; j < array.length - i - 1; j++) {
-
-                if (array[j] > array[j + 1]) {
-                    int temp = array[j];
-                    array[j] = array[j + 1];
-                    array[j + 1] = temp;
-                }
-            }
-        }
-        return array;
-    }
-
-    static int[] sortByBubbleOptimization(int[] array) {
-
-        if (array == null || array.length == 0) {
-            return new int[0];
-        }
-
         boolean isSwapped = true;
         int i = 0;
         while (isSwapped) {
@@ -87,6 +68,7 @@ public class Task17 {
         }
         return array;
     }
+
 
     /**
      * Быстрая сортировка, она же QuickSort:
@@ -134,32 +116,60 @@ public class Task17 {
             return new int[0];
         }
 
-        int max = array.length - 1;
-        int min = 0;
-        quickSort(array, min, max);
+        int left = 0;
+        int right = array.length - 1;
+
+        quickSort(array, left, right);
         return array;
     }
 
+    static int getBaseElement(int[] array, int left, int right) {
+
+        int max = Integer.MAX_VALUE;
+        int min = Integer.MIN_VALUE;
+        for (int i = left; i <= right; i++) {
+            min = Math.min(min, array[i]);
+            max = Math.max(max, array[i]);
+        }
+        return (min + max) / 2;
+    }
+
     static void quickSort(int[] array, int left, int right) {
+       if (left > right) {
+           return;
+        }
+
         int i = left;
         int j = right;
-        int support = (right - left) / 2;
-
-        while (array[i] < array[left + support]) {
-            i++;
+        if (i - j == 1) {
+            if (array[i] >  array[j]) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return;
         }
-        while (array[j] > array[left + support]) {
+
+        int baseElement = getBaseElement(array, left, right);
+
+        while (i <= j) {
+            while (array[i] < baseElement) {
+                i++;
+            }
+            while (array[j] > baseElement) {
+                j--;
+            }
+
+            if (i <= j) {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+
+            }
+
+            i++;
             j--;
         }
-
-        if (i <= j) {
-            int temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
-            i++;
-            j--;
-        }
-
         if (left < j) {
             quickSort(array, left, j);
         }
