@@ -135,13 +135,13 @@ public class Task17 {
     }
 
     static void quickSort(int[] array, int left, int right) {
-       if (left > right) {
+       if (array.length < 2)  {
            return;
         }
 
         int i = left;
         int j = right;
-        if (i - j == 1) {
+        if (j - i == 1) {
             if (array[i] >  array[j]) {
                 int temp = array[i];
                 array[i] = array[j];
