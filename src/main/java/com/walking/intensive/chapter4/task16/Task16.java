@@ -21,9 +21,9 @@ package com.walking.intensive.chapter4.task16;
 public class Task16 {
     public static void main(String[] args) {
 //        Для собственных проверок можете делать любые изменения в этом методе
-        int[] arr1 = {2, 3, 4, 5, 4, 10, 22, 2};
-        int[] arr2 = {5, 1};
-        int[] arrnull = {};
+//        int[] arr1 = {2, 3, 4, 5, 4, 10, 22, 2};
+//        int[] arr2 = {5, 1};
+//        int[] arrnull = {};
 
 //        System.out.println(isEqualSize(arr1, arr2));
 //        System.out.println(isEquals(arr1, arr2));
@@ -227,9 +227,9 @@ public class Task16 {
      * В остальных случаях - false.
      */
     static boolean isContains(int[] arr, int value) {
-        for (int i = 0; i < arr.length; i++) {
+        for (int i : arr) {
 
-            if (arr[i] == value) {
+            if (i == value) {
                 return true;
             }
         }
