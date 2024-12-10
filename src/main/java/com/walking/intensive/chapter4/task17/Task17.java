@@ -28,8 +28,8 @@ public class Task17 {
 //        System.out.println(Arrays.toString(sortByBubble(new int[]{1, 8, 4, 0, -1, -10, -20})));
 //        System.out.println(Arrays.toString(sortByQuicksort(new int[]{20, 40, 0, 5, 6, 2, 1, 10, 20})));
 //        System.out.println(Arrays.toString(sortByQuicksort(new int[]{20, 4})));
-        System.out.println("1000 элементов, пузырьком минус быстрая (ms):" + getBenchmarkOn1000());
-        System.out.println("10000 элементов, пузырьком минус быстрая (ms):" + getBenchmarkOn10000());
+//        System.out.println("1000 элементов, пузырьком минус быстрая (ms):" + getBenchmarkOn1000());
+//        System.out.println("10000 элементов, пузырьком минус быстрая (ms):" + getBenchmarkOn10000());
 
     }
 
