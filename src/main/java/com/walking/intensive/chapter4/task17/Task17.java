@@ -1,6 +1,6 @@
 package com.walking.intensive.chapter4.task17;
 
-import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Смауг, живущий в пещере с золотом, был заперт внутри горы.
@@ -26,8 +26,11 @@ public class Task17 {
 
 //        System.out.println(Arrays.toString(sortByBubble(new int[]{1, 2, 4, 0, -1, -10, -20})));
 //        System.out.println(Arrays.toString(sortByBubble(new int[]{1, 8, 4, 0, -1, -10, -20})));
-        System.out.println(Arrays.toString(sortByQuicksort(new int[]{2, 4, 0, -1, -1, -1, 1, -10, -20})));
-        System.out.println(Arrays.toString(sortByQuicksort(new int[]{20, 4})));
+//        System.out.println(Arrays.toString(sortByQuicksort(new int[]{20, 40, 0, 5, 6, 2, 1, 10, 20})));
+//        System.out.println(Arrays.toString(sortByQuicksort(new int[]{20, 4})));
+        System.out.println("1000 элементов, пузырьком минус быстрая (ms):" + getBenchmarkOn1000());
+        System.out.println("10000 элементов, пузырьком минус быстрая (ms):" + getBenchmarkOn10000());
+
     }
 
     /**
@@ -118,31 +121,34 @@ public class Task17 {
 
         int left = 0;
         int right = array.length - 1;
-
         quickSort(array, left, right);
         return array;
     }
 
     static int getBaseElement(int[] array, int left, int right) {
 
-        int max = Integer.MAX_VALUE;
-        int min = Integer.MIN_VALUE;
+        int minValue = Integer.MAX_VALUE;
+        int maxValue = Integer.MIN_VALUE;
         for (int i = left; i <= right; i++) {
-            min = Math.min(min, array[i]);
-            max = Math.max(max, array[i]);
+            minValue = Math.min(minValue, array[i]);
+            maxValue = Math.max(maxValue, array[i]);
         }
-        return (min + max) / 2;
+        return (minValue + maxValue) / 2;
     }
 
     static void quickSort(int[] array, int left, int right) {
-       if (array.length < 2)  {
-           return;
+        if (array.length < 2) {
+            return;
+        }
+        if (left >= right) {
+            return;
         }
 
         int i = left;
         int j = right;
-        if (j - i == 1) {
-            if (array[i] >  array[j]) {
+
+        if (array.length == 2) {
+            if (array[i] > array[j]) {
                 int temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
@@ -150,8 +156,7 @@ public class Task17 {
             return;
         }
 
-        int baseElement = getBaseElement(array, left, right);
-
+        int baseElement = getBaseElement(array, i, j);
         while (i <= j) {
             while (array[i] < baseElement) {
                 i++;
@@ -164,19 +169,19 @@ public class Task17 {
                 int temp = array[i];
                 array[i] = array[j];
                 array[j] = temp;
-
+                i++;
+                j--;
             }
-
-            i++;
-            j--;
         }
+
         if (left < j) {
             quickSort(array, left, j);
         }
 
-        if (i < right) {
+        if (right > i) {
             quickSort(array, i, right);
         }
+
     }
 
     /**
@@ -188,15 +193,34 @@ public class Task17 {
      * Время выполнения - разность времени после работы алгоритма и времени до работы алгоритма
      */
     static long getBenchmarkOn1000() {
-        // Ваш код
-        return 0;
+
+        return getBenchmark(1000);
     }
 
     /**
      * Повторите предыдущие вычисления из метода getBenchmarkOn1000() для массива в 10 000 элементов.
      */
     static long getBenchmarkOn10000() {
-        // Ваш код
-        return 0;
+
+        return getBenchmark(10000);
+    }
+
+    static long getBenchmark(int size) {
+
+        Random randomNumber = new Random();
+        int[] array = new int[size];
+        for (int i = 0; i < size; i++) {
+            array[i] = randomNumber.nextInt(100);
+        }
+        int[] arrayCopy = new int[size];
+        System.arraycopy(array, 0, arrayCopy, 0, size);
+        long bubbleTime = System.currentTimeMillis();
+        sortByBubble(array);
+        bubbleTime = System.currentTimeMillis() - bubbleTime;
+        long quickTime = System.currentTimeMillis();
+        sortByQuicksort(arrayCopy);
+        quickTime = System.currentTimeMillis() - quickTime;
+
+        return quickTime - bubbleTime;
     }
 }
