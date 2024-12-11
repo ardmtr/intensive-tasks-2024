@@ -133,7 +133,7 @@ public class Task17 {
             minValue = Math.min(minValue, array[i]);
             maxValue = Math.max(maxValue, array[i]);
         }
-        return (minValue + maxValue) / 2;
+        return (maxValue + (maxValue - minValue)) / 2;
     }
 
     static void quickSort(int[] array, int left, int right) {
