@@ -59,6 +59,24 @@ public class Parallelepiped {
         double yC = (pointA.getY() + pointB.getY()) / 2;
         double zC = (pointA.getZ() + pointB.getZ()) / 2;
 
-        return new Point(xC,yC,zC);
+        return new Point(xC, yC, zC);
     }
+
+    public double getDistanceToNearestVertices(Point point) {
+
+        double minDistanceToPoint = Double.MAX_VALUE;
+        Point[] vertices = vertices();
+
+        for (Point vertex : vertices) {
+            double d = point.distancePointToPoint(vertex);
+
+            if (d < minDistanceToPoint) {
+                minDistanceToPoint = d;
+            }
+        }
+
+        return minDistanceToPoint;
+    }
+
+
 }
