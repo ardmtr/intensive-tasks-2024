@@ -37,20 +37,19 @@ public class Parallelepiped {
         double x1 = pointA.getX();
         double y1 = pointA.getY();
         double z1 = pointA.getZ();
-        double x2 = pointA.getX();
-        double y2 = pointA.getY();
-        double z2 = pointA.getZ();
-        Point[] vertices = new Point[8];
-        vertices[1] = new Point(x1, y1, z1);
-        vertices[1] = new Point(x1, y1, z2);
-        vertices[1] = new Point(x1, y2, z1);
-        vertices[1] = new Point(x1, y2, z2);
-        vertices[1] = new Point(x2, y2, z2);
-        vertices[1] = new Point(x2, y1, z1);
-        vertices[1] = new Point(x2, y2, z1);
-        vertices[1] = new Point(x2, y1, z2);
+        double x2 = pointB.getX();
+        double y2 = pointB.getY();
+        double z2 = pointB.getZ();
 
-        return vertices;
+        return new Point[]{
+                new Point(Math.min(x1, x2), Math.min(y1, y2), Math.min(z1, z2)),
+                new Point(Math.min(x1, x2), Math.max(y1, y2), Math.min(z1, z2)),
+                new Point(Math.min(x1, x2), Math.max(y1, y2), Math.max(z1, z2)),
+                new Point(Math.min(x1, x2), Math.min(y1, y2), Math.max(z1, z2)),
+                new Point(Math.max(x1, x2), Math.min(y1, y2), Math.max(z1, z2)),
+                new Point(Math.max(x1, x2), Math.max(y1, y2), Math.max(z1, z2)),
+                new Point(Math.max(x1, x2), Math.max(y1, y2), Math.min(z1, z2)),
+                new Point(Math.max(x1, x2), Math.min(y1, y2), Math.min(z1, z2))};
     }
 
     public Point getCenter() {
@@ -62,20 +61,22 @@ public class Parallelepiped {
         return new Point(xC, yC, zC);
     }
 
-    public double getDistanceToNearestVertices(Point point) {
+    public Point getNearestVertices(Point point) {
 
         double minDistanceToPoint = Double.MAX_VALUE;
         Point[] vertices = vertices();
+        Point nearestVertex = new Point(0, 0, 0);
 
         for (Point vertex : vertices) {
             double d = point.distancePointToPoint(vertex);
 
             if (d < minDistanceToPoint) {
                 minDistanceToPoint = d;
+                nearestVertex = vertex;
             }
         }
 
-        return minDistanceToPoint;
+        return nearestVertex;
     }
 
 
