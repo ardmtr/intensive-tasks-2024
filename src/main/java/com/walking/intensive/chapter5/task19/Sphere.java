@@ -25,17 +25,18 @@ public class Sphere {
     }
 
     public boolean isCenterInsideParallelepiped(Parallelepiped parallelepiped) {
+
         double x = center.getX();
         double y = center.getY();
         double z = center.getZ();
         double cx = parallelepiped.getCenter().getX();
         double cy = parallelepiped.getCenter().getY();
         double cz = parallelepiped.getCenter().getZ();
-        double dx = parallelepiped.lengthX();
-        double dy = parallelepiped.lengthY();
-        double dz = parallelepiped.lengthZ();
-        System.out.println("центр сферы внутри = " + !(Math.abs(cx - x) > dx || Math.abs(cy - y) > dy || Math.abs(cz - z) > dz));
-        return !(Math.abs(cx - x) > dx) || (Math.abs(cy - y) > dy) || (Math.abs(cz - z) > dz);
+        double dx = parallelepiped.lengthX() / 2;
+        double dy = parallelepiped.lengthY() / 2;
+        double dz = parallelepiped.lengthZ() / 2;
+
+        return (Math.abs(cx - x) < dx) && (Math.abs(cy - y) < dy) && (Math.abs(cz - z) < dz);
     }
 
     public boolean isInsideParallelepiped(Parallelepiped parallelepiped) {
@@ -46,9 +47,9 @@ public class Sphere {
         Point[] vertices = parallelepiped.vertices();
 
         for (Point vertex : vertices) {
-            double distance = vertex.distancePointToPoint(center);
+            double squaredDistance = Math.pow(vertex.distancePointToPoint(center),2);
 
-            if (distance <= Math.pow(this.getRadius(), 2)) {
+            if (squaredDistance <= Math.pow(this.getRadius(), 2)) {
                 return false;
             }
 
@@ -65,13 +66,13 @@ public class Sphere {
         Point[] vertices = parallelepiped.vertices();
 
         for (Point vertex : vertices) {
-            double distance = vertex.distancePointToPoint(center);
+            double squaredDistance = Math.pow(vertex.distancePointToPoint(center),2);
 
-            if (distance > Math.pow(this.getRadius(), 2)) {
+            if (squaredDistance > Math.pow(this.getRadius(), 2)) {
                 return false;
             }
-
         }
+
         return true;
     }
 }

@@ -1,7 +1,5 @@
 package com.walking.intensive.chapter5.task19;
 
-import java.util.Arrays;
-
 /**
  * Создайте классы фигур: класс сфера и параллелепипед.
  * Объект «Сфера» должен задаваться по координате точки центра
@@ -19,44 +17,32 @@ import java.util.Arrays;
  */
 public class Task19 {
     public static void main(String[] args) throws Exception {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
         Point a = new Point(-2, -2, -2);
         Point b = new Point(2, 2, 2);
         Parallelepiped parallelepiped = new Parallelepiped(a, b);
-        Point c = new Point(10, 100, 10);
-        Sphere sphere = new Sphere(c, 1);
-         System.out.println("пересекаются? = " + isIntersected(sphere, parallelepiped));
-        //  System.out.println(Arrays.toString(parallelepiped.vertices()));
+        Point c = new Point(100, 100, 100);
+        Sphere sphere = new Sphere(c, -5);
+        System.out.println("пересекаются? = " + isIntersected(sphere, parallelepiped));
+
 
     }
 
     static boolean isIntersected(Sphere sphere, Parallelepiped parallelepiped) {
 
         Point center = sphere.getCenter();
-        // System.out.println(center);
         double squaredRadius = Math.pow(sphere.getRadius(), 2);
         Point nearestVertex = parallelepiped.getNearestVertices(center);
-        //  System.out.println(nearestVertex.toString());
-        double distance = nearestVertex.distancePointToPoint(center);
-        // System.out.println(distance);
-        //  System.out.println(squaredRadius);
-//        if (distance <= squaredRadius) {
-//            return true;
-//        }
+        double squaredDistance = Math.pow(nearestVertex.distancePointToPoint(center), 2);
 
-        for (Point vertex : parallelepiped.vertices()) {
-            distance = vertex.distancePointToPoint(center);
-       //     System.out.println(distance);
-       //     System.out.println(vertex);
-            if (distance <= squaredRadius) {
-                return true;
-            }
+        if (sphere.containsParallelepiped(parallelepiped)) {
+            return true;
         }
 
-        System.out.println("пп в сфере = " + sphere.containsParallelepiped(parallelepiped));
-        System.out.println("сфера в пп = " + sphere.isInsideParallelepiped(parallelepiped));
-        System.out.println("расстояние меньше радиуса^2 = " + (distance <= squaredRadius));
-return sphere.containsParallelepiped(parallelepiped) || sphere.isInsideParallelepiped(parallelepiped) ||
-        (distance <= squaredRadius);
+        if (sphere.isInsideParallelepiped(parallelepiped)) {
+            return true;
+        }
+
+        return squaredDistance <= squaredRadius;
     }
 }
