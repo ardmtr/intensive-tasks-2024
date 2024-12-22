@@ -21,8 +21,8 @@ public class Task19 {
         Point a = new Point(-2, -2, -2);
         Point b = new Point(2, 2, 2);
         Parallelepiped parallelepiped = new Parallelepiped(a, b);
-        Point c = new Point(100, 100, 100);
-        Sphere sphere = new Sphere(c, -5);
+        Point c = new Point(10, 10, 10);
+        Sphere sphere = new Sphere(c, 1);
         System.out.println("пересекаются? = " + isIntersected(sphere, parallelepiped));
 
 

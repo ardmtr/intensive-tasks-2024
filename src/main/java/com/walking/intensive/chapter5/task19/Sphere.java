@@ -24,7 +24,7 @@ public class Sphere {
         return center;
     }
 
-    public boolean isCenterInsideParallelepiped(Parallelepiped parallelepiped) {
+    public boolean isCenterOutsideParallelepiped(Parallelepiped parallelepiped) {
 
         double x = center.getX();
         double y = center.getY();
@@ -36,12 +36,12 @@ public class Sphere {
         double dy = parallelepiped.lengthY() / 2;
         double dz = parallelepiped.lengthZ() / 2;
 
-        return (Math.abs(cx - x) < dx) && (Math.abs(cy - y) < dy) && (Math.abs(cz - z) < dz);
+        return !(Math.abs(cx - x) < dx) && (Math.abs(cy - y) < dy) && (Math.abs(cz - z) < dz);
     }
 
     public boolean isInsideParallelepiped(Parallelepiped parallelepiped) {
 
-        if (!isCenterInsideParallelepiped(parallelepiped)) {
+        if (isCenterOutsideParallelepiped(parallelepiped)) {
             return false;
         }
         Point[] vertices = parallelepiped.vertices();
@@ -59,7 +59,7 @@ public class Sphere {
 
     public boolean containsParallelepiped(Parallelepiped parallelepiped) {
 
-        if (!isCenterInsideParallelepiped(parallelepiped)) {
+        if (isCenterOutsideParallelepiped(parallelepiped)) {
             return false;
         }
 
