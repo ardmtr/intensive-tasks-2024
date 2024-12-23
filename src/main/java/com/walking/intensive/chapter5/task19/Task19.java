@@ -1,5 +1,8 @@
 package com.walking.intensive.chapter5.task19;
 
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * Создайте классы фигур: класс сфера и параллелепипед.
  * Объект «Сфера» должен задаваться по координате точки центра
@@ -18,13 +21,21 @@ package com.walking.intensive.chapter5.task19;
 public class Task19 {
     public static void main(String[] args) throws Exception {
 
-        Point a = new Point(-20, -20, -20);
-        Point b = new Point(20, 20, 20);
-        Parallelepiped parallelepiped = new Parallelepiped(a, b);
-        Point c = new Point(5, 5, 5);
-        Sphere sphere = new Sphere(c, 6);
-        System.out.println("пересекаются? = " + isIntersected(sphere, parallelepiped));
+        Random random = new Random();
+        for (int i = 0; i < 5; i++) {
 
+            Point a = getRandomPoint();
+            Point b = getRandomPoint();
+            Parallelepiped parallelepiped = new Parallelepiped(a, b);
+            Point c = getRandomPoint();
+            int radius = random.nextInt(20);
+            Sphere sphere = new Sphere(c, radius);
+            System.out.println("Параллелепипед. А =" + a + ", B = " + b);
+            //System.out.println(Arrays.toString(parallelepiped.vertices()));
+            System.out.println("Сфера. центр = " + c + ", радиус = " + radius);
+            System.out.println("пересекаются? = " + isIntersected(sphere, parallelepiped));
+
+        }
 
     }
 
@@ -33,7 +44,6 @@ public class Task19 {
         Point center = sphere.getCenter();
         double squaredRadius = Math.pow(sphere.getRadius(), 2);
         Point nearestVertex = parallelepiped.getNearestVertices(center);
-        System.out.println("ближайшая вершина = " + nearestVertex);
         double squaredDistance = Math.pow(nearestVertex.distancePointToPoint(center), 2);
 
         if (sphere.containsParallelepiped(parallelepiped)) {
@@ -45,5 +55,10 @@ public class Task19 {
         }
 
         return squaredDistance <= squaredRadius;
+    }
+
+    public static Point getRandomPoint() {
+        Random random = new Random();
+        return new Point(random.nextInt(-20, 20), random.nextInt(-20, 20), random.nextInt(-20, 20));
     }
 }
