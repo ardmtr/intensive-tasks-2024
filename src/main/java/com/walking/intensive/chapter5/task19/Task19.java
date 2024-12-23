@@ -18,11 +18,11 @@ package com.walking.intensive.chapter5.task19;
 public class Task19 {
     public static void main(String[] args) throws Exception {
 
-        Point a = new Point(-2, -2, -2);
-        Point b = new Point(2, 2, 2);
+        Point a = new Point(-20, -20, -20);
+        Point b = new Point(20, 20, 20);
         Parallelepiped parallelepiped = new Parallelepiped(a, b);
-        Point c = new Point(10, 10, 10);
-        Sphere sphere = new Sphere(c, 1);
+        Point c = new Point(5, 5, 5);
+        Sphere sphere = new Sphere(c, 6);
         System.out.println("пересекаются? = " + isIntersected(sphere, parallelepiped));
 
 
@@ -33,6 +33,7 @@ public class Task19 {
         Point center = sphere.getCenter();
         double squaredRadius = Math.pow(sphere.getRadius(), 2);
         Point nearestVertex = parallelepiped.getNearestVertices(center);
+        System.out.println("ближайшая вершина = " + nearestVertex);
         double squaredDistance = Math.pow(nearestVertex.distancePointToPoint(center), 2);
 
         if (sphere.containsParallelepiped(parallelepiped)) {

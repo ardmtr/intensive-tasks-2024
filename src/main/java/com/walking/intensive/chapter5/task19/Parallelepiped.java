@@ -65,7 +65,7 @@ public class Parallelepiped {
 
         double minDistanceToPoint = Double.MAX_VALUE;
         Point[] vertices = vertices();
-        Point nearestVertex = new Point(0, 0, 0);
+        Point nearestVertex = null;
 
         for (Point vertex : vertices) {
             double d = point.distancePointToPoint(vertex);

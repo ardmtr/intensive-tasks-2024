@@ -24,7 +24,7 @@ public class Sphere {
         return center;
     }
 
-    public boolean isCenterOutsideParallelepiped(Parallelepiped parallelepiped) {
+    public boolean isCenterInsideParallelepiped(Parallelepiped parallelepiped) {
 
         double x = center.getX();
         double y = center.getY();
@@ -36,18 +36,18 @@ public class Sphere {
         double dy = parallelepiped.lengthY() / 2;
         double dz = parallelepiped.lengthZ() / 2;
 
-        return !(Math.abs(cx - x) < dx) && (Math.abs(cy - y) < dy) && (Math.abs(cz - z) < dz);
+        return (Math.abs(cx - x) < dx) || (Math.abs(cy - y) < dy) || (Math.abs(cz - z) < dz);
     }
 
     public boolean isInsideParallelepiped(Parallelepiped parallelepiped) {
 
-        if (isCenterOutsideParallelepiped(parallelepiped)) {
+        if (!isCenterInsideParallelepiped(parallelepiped)) {
             return false;
         }
         Point[] vertices = parallelepiped.vertices();
 
         for (Point vertex : vertices) {
-            double squaredDistance = Math.pow(vertex.distancePointToPoint(center),2);
+            double squaredDistance = Math.pow(vertex.distancePointToPoint(center), 2);
 
             if (squaredDistance <= Math.pow(this.getRadius(), 2)) {
                 return false;
@@ -59,14 +59,14 @@ public class Sphere {
 
     public boolean containsParallelepiped(Parallelepiped parallelepiped) {
 
-        if (isCenterOutsideParallelepiped(parallelepiped)) {
+        if (!isCenterInsideParallelepiped(parallelepiped)) {
             return false;
         }
 
         Point[] vertices = parallelepiped.vertices();
 
         for (Point vertex : vertices) {
-            double squaredDistance = Math.pow(vertex.distancePointToPoint(center),2);
+            double squaredDistance = Math.pow(vertex.distancePointToPoint(center), 2);
 
             if (squaredDistance > Math.pow(this.getRadius(), 2)) {
                 return false;
