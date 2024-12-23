@@ -1,6 +1,6 @@
 package com.walking.intensive.chapter5.task19;
 
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.Random;
 
 /**
