@@ -24,7 +24,7 @@ package com.walking.intensive.chapter5.task20;
  */
 public class Task20 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
     }
 
     /**
@@ -40,9 +40,31 @@ public class Task20 {
      * До тех пор приходится находить обходные пути для обозначения ситуаций, когда что-то пошло не по плану.
      */
     static Integer getDeterminant(int[][] matrix) {
-        // Ваш код
-        return null;
+
+        if (!isValid(matrix)) {
+            return null;
+        }
+
+        int size = matrix.length;
+        double determinant = 0;
+
+        if (size == 1) {
+            return matrix[0][0];
+        }
+
+        if (size == 2) {
+            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        }
+
+        for (int i = 0; i < size; i++) {
+
+            int[][] newMatrix = getMatrixWithoutRowAndCol(matrix, size, 0, i);
+            determinant += Math.pow(-1, i) * matrix[0][i] * getDeterminant(newMatrix);
+        }
+
+        return (int) determinant;
     }
+
 
     /**
      * Входное значение - валидируемая матрица, представленная в виде двумерного массива.
@@ -53,6 +75,42 @@ public class Task20 {
      * getDeterminant() должен использовать isValid().
      */
     static boolean isValid(int[][] matrix) {
-        return false;
+
+        if (matrix == null || matrix.length == 0) {
+            return false;
+        }
+
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        for (int i = 1; i < rows; i++) {
+            if (matrix[i].length != cols) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static int[][] getMatrixWithoutRowAndCol(int[][] matrix, int size, int rowToRemove, int colToRemove) {
+
+        int[][] resultMatrix = new int[size - 1][size - 1];
+
+        for (int i = 0, currentI = 0; i < size; i++) {
+
+            if (i != rowToRemove) {
+
+                for (int j = 0, currentJ = 0; j < size; j++) {
+
+                    if (j != colToRemove) {
+                        resultMatrix[currentI][currentJ++] = matrix[i][j];
+                    }
+                }
+
+                currentI++;
+            }
+        }
+
+        return resultMatrix;
     }
 }
